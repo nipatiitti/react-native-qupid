@@ -1,8 +1,12 @@
 # react-native-qupid
 
-QR Code scanning made simple stupid (and fast): **Qupid**.
 
-<img src="assets/Example_2.png" alt="example_image" height="400" width="400" style="object-fit: cover; object-position: 50% 60%;" />
+<div style="display: flex; width: 100%;">
+
+
+<div style="flex: 1;>
+
+QR Code scanning made simple stupid (and fast): **Qupid**.
 
 This library uses the react native [new architecture](https://github.com/reactwg/react-native-new-architecture/tree/main) with TurboModules significantly improving the performance compared packages using the old architecture.
 
@@ -20,7 +24,10 @@ There is also a [example](example) project to test the library. The example proj
 - [Benchmark](example/src/components/Benchmark.tsx)
 
 More about performance can be found in the [performance](PERFORMANCE.md) document.
+</div>
 
+<img src="assets/Example_2.png" alt="example_image" width="300" style="flex: 1;" />
+</div>
 ## Installation
 
 <details open>
