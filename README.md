@@ -1,6 +1,8 @@
 # react-native-qupid
 
-QR Code scanning made simple stupid (and fast): **Qupid**.
+QR Code scanning stupid simple: **Qupid**.
+
+React Native library for both android and iOS to read QR codes from images. This library is designed to be simple to use and fast. It can read QR codes from images and raw bitmaps.
 
 <img src="assets/Example_2.png" alt="example_image" height="400" width="400" style="object-fit: cover; object-position: 50% 60%;" />
 
@@ -8,7 +10,7 @@ This library uses the react native [new architecture](https://github.com/reactwg
 
 All react-native code is in TypeScript, android code is full Kotlin and iOS code is Objective-C.
 
-Under the hood it uses [BoofCV](https://boofcv.org/index.php?title=Main_Page) for android (which is 1.8 faster than the google MLKit. For more info check the [performance](PERFORMANCE.md) section) and [VisionKit](https://developer.apple.com/documentation/vision) for iOS.
+Under the hood it uses [BoofCV](https://boofcv.org/index.php?title=Main_Page) for android (which is 1.8 faster than the google MLKit. For more info check the [performance](PERFORMANCE.md) section) and [zxing-cpp](https://github.com/zxing-cpp/zxing-cpp/tree/master) for iOS.
 
 This project has the TurboModule javascript interface in [src](src) and the native codes in [android](android) / [ios](ios) folders.
 
@@ -42,6 +44,18 @@ npm install react-native-qupid
 ## Setup
 
 To enable the new architecture for your apps (it's enabled by default in the example project), follow the instructions in the [here](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md)
+
+### Android
+
+This library doesn't require any additional setup for android.
+
+### iOS
+
+Add the following to your `Podfile`:
+
+```ruby
+  pod 'zxing-cpp'
+```
 
 ## Usage
 

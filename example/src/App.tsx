@@ -1,6 +1,6 @@
+import { Picker } from '@react-native-picker/picker'
 import React, { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-import RNPickerSelect from 'react-native-picker-select'
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native'
 import { Base64ToRawBitmap } from './components/Base64ToRawBitmap'
 import { BasicImageRead } from './components/BasicImageRead'
 import { Benchmark } from './components/Benchmark'
@@ -38,14 +38,15 @@ export default function App() {
   const [selected, setSelected] = useState<Key>('BasicImageRead')
 
   return (
-    <View style={styles.container}>
-      <RNPickerSelect
-        onValueChange={(value) => setSelected(value)}
-        value={selected}
-        items={selectItems.map((item) => ({ ...item }))}
-      />
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#454545" />
+      <Picker selectedValue={selected} onValueChange={(itemValue) => setSelected(itemValue)}>
+        {selectItems.map((item) => (
+          <Picker.Item key={item.value} label={item.label} value={item.value} />
+        ))}
+      </Picker>
       {components[selected]}
-    </View>
+    </SafeAreaView>
   )
 }
 
