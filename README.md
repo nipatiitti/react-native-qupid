@@ -10,7 +10,7 @@ This library uses the react native [new architecture](https://github.com/reactwg
 
 All react-native code is in TypeScript, android code is full Kotlin and iOS code is Objective-C.
 
-Under the hood it uses [BoofCV](https://boofcv.org/index.php?title=Main_Page) for android (which is 1.8 faster than the google MLKit. For more info check the [performance](PERFORMANCE.md) section) and [zxing-cpp](https://github.com/zxing-cpp/zxing-cpp/tree/master) for iOS.
+Under the hood it uses [BoofCV](https://boofcv.org/index.php?title=Main_Page) for android (which is 1.8 faster than the google MLKit. For more info check the [performance](PERFORMANCE.md) section) and [CIDetector](https://developer.apple.com/documentation/coreimage/cidetectortypeqrcode?language=objc) for iOS.
 
 This project has the TurboModule javascript interface in [src](src) and the native codes in [android](android) / [ios](ios) folders.
 

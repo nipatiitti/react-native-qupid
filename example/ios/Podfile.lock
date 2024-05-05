@@ -1337,11 +1337,6 @@ PODS:
     - Yoga
   - SocketRocket (0.7.0)
   - Yoga (0.0.0)
-  - zxing-cpp (2.2.0):
-    - zxing-cpp/Wrapper (= 2.2.0)
-  - zxing-cpp/Core (2.2.0)
-  - zxing-cpp/Wrapper (2.2.0):
-    - zxing-cpp/Core
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
@@ -1407,12 +1402,10 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
-  - zxing-cpp
 
 SPEC REPOS:
   trunk:
     - SocketRocket
-    - zxing-cpp
 
 EXTERNAL SOURCES:
   boost:
@@ -1602,8 +1595,7 @@ SPEC CHECKSUMS:
   RNSVG: 02051bffb0b2fb2166e85009a58211643434ff63
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372
-  zxing-cpp: 7486c8459df40d8f6a5453cc1ec35e67b10cd25a
 
-PODFILE CHECKSUM: dbbcbab2474ba565f08430835a9c3983adea98ce
+PODFILE CHECKSUM: 764ba7a430ed611c8a39eaf3ee90262224b52980
 
 COCOAPODS: 1.14.3

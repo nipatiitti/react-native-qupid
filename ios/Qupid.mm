@@ -1,40 +1,18 @@
 #import "Qupid.h"
 
-#import "zxing-cpp/ZXIBarcodeReader.h"
-#import "zxing-cpp/ZXIFormat.h"
-
 @implementation Qupid
 RCT_EXPORT_MODULE()
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
 
-- (NSString *)convertZXIResultToJSON:(ZXIResult *)result {
-    NSDictionary *positionDict = @{
-        @"topLeft": @{
-            @"x": @(result.position.topLeft.x),
-            @"y": @(result.position.topLeft.y)
-        },
-        @"topRight": @{
-            @"x": @(result.position.topRight.x),
-            @"y": @(result.position.topRight.y)
-        },
-        @"bottomRight": @{
-            @"x": @(result.position.bottomRight.x),
-            @"y": @(result.position.bottomRight.y)
-        },
-        @"bottomLeft": @{
-            @"x": @(result.position.bottomLeft.x),
-            @"y": @(result.position.bottomLeft.y)
-        }
-    };
-    
+- (NSString *)convertFeatureToJSON:(CIQRCodeFeature *)result {
     NSDictionary *jsonDict = @{
-        @"data": result.text,
-        @"x": @(result.position.topLeft.x),
-        @"y": @(result.position.topLeft.y),
-        @"width": @(result.position.topRight.x - result.position.topLeft.x),
-        @"height": @(result.position.bottomLeft.y - result.position.topLeft.y)
+        @"data": result.messageString,
+        @"x": @(result.topLeft.x),
+        @"y": @(result.topLeft.y),
+        @"width": @(result.topRight.x - result.topLeft.x),
+        @"height": @(result.bottomLeft.y - result.topLeft.y)
     };
     
     NSError *error = nil;
@@ -58,37 +36,56 @@ RCT_EXPORT_MODULE()
     return filePath;
 }
 
+-(NSArray *)detectQRCode:(CIImage *) image {
+    @autoreleasepool {
+        NSDictionary* options;
+        CIContext* context = [CIContext context];
+        // options = @{ CIDetectorAccuracy : CIDetectorAccuracyHigh }; // Slow but thorough
+        options = @{ CIDetectorAccuracy : CIDetectorAccuracyLow}; // Fast but superficial
+        
+        CIDetector* qrDetector = [CIDetector detectorOfType:CIDetectorTypeQRCode
+                                                    context:context
+                                                    options:options];
+        
+        if ([[image properties] valueForKey:(NSString*) kCGImagePropertyOrientation] == nil) {
+            options = @{ CIDetectorImageOrientation : @1};
+        } else {
+            options = @{ CIDetectorImageOrientation : [[image properties] valueForKey:(NSString*) kCGImagePropertyOrientation]};
+        }
+        
+        NSArray * features = [qrDetector featuresInImage:image
+                                                 options:options];
+        
+        return features;
+        
+    }
+}
+
 - (NSString *)processImage:(CIImage *)image {
-    ZXIReaderOptions *options = [[ZXIReaderOptions alloc] init];
-    options.formats = @[ @(QR_CODE) ];
-    ZXIBarcodeReader *barcodeReader = [[ZXIBarcodeReader alloc] initWithOptions:options];
     
-    NSError *error = nil;
-    NSArray<ZXIResult *> *results = [barcodeReader readCIImage:image error:&error];
-    if (error != nil) {
-        NSLog(@"Error reading barcode: %@", error);
-        return nil;
-    } else {
+    NSArray* features = [self detectQRCode:image];
+    
+    if (features != nil && features.count > 0) {
         NSMutableString *combinedText = [NSMutableString string];
         [combinedText appendString:@"["]; // Start of JSON array
         
-        for (ZXIResult *result in results) {
-            NSString *toJson = [self convertZXIResultToJSON:result];
+        for (CIQRCodeFeature* qrFeature in features) {
+            NSString *toJson = [self convertFeatureToJSON:qrFeature];
             [combinedText appendString:toJson];
             [combinedText appendString:@","]; // Add comma to separate JSON objects
         }
-         
-        if (results.count > 0) {
-            // Remove the last comma
-            NSRange lastCommaRange = [combinedText rangeOfString:@"," options:NSBackwardsSearch];
-            if (lastCommaRange.location != NSNotFound) {
-                [combinedText deleteCharactersInRange:lastCommaRange];
-            }
+        
+        // Remove the last comma
+        NSRange lastCommaRange = [combinedText rangeOfString:@"," options:NSBackwardsSearch];
+        if (lastCommaRange.location != NSNotFound) {
+            [combinedText deleteCharactersInRange:lastCommaRange];
         }
         
         [combinedText appendString:@"]"]; // End of JSON array
         
         return [combinedText copy];
+    } else {
+        return @"[]";
     }
 }
 
