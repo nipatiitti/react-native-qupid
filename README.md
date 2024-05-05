@@ -45,18 +45,6 @@ npm install react-native-qupid
 
 To enable the new architecture for your apps (it's enabled by default in the example project), follow the instructions in the [here](https://github.com/reactwg/react-native-new-architecture/blob/main/docs/enable-apps.md)
 
-### Android
-
-This library doesn't require any additional setup for android.
-
-### iOS
-
-Add the following to your `Podfile`:
-
-```ruby
-  pod 'zxing-cpp'
-```
-
 ## Usage
 
 This library exports the functions `readImage`, `readRaw` with the `useQupid` hook for ease of use. 
