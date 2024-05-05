@@ -4,7 +4,7 @@ QR Code scanning stupid simple: **Qupid**.
 
 React Native library for both android and iOS to read QR codes from images. This library is designed to be simple to use and fast. It can read QR codes from images and raw bitmaps.
 
-<img src="assets/Example_2.png" alt="example_image" height="400" width="400" style="object-fit: cover; object-position: 50% 60%;" />
+<img src="assets/Example_2.png" alt="example_image" width="300" style="object-fit: cover; object-position: 50% 60%;" />
 
 This library uses the react native [new architecture](https://github.com/reactwg/react-native-new-architecture/tree/main) with TurboModules significantly improving the performance compared packages using the old architecture.
 
