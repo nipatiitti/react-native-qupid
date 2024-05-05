@@ -43,7 +43,7 @@ export default function App() {
       <Picker
         selectedValue={selected}
         onValueChange={(itemValue) => setSelected(itemValue)}
-        style={{ width: '100%', color: '#000', backgroundColor: '#888' }}
+        style={{ width: '100%', color: '#000', backgroundColor: '#888', marginBottom: 10 }}
       >
         {selectItems.map((item) => (
           <Picker.Item key={item.value} label={item.label} value={item.value} />
