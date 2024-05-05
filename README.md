@@ -47,7 +47,7 @@ To enable the new architecture for your apps (it's enabled by default in the exa
 
 ## Usage
 
-This library exports the functions `readImage`, `readRaw` with the `useQupid` hook for ease of use. 
+This library exports the functions `readImage` and `readRaw` with the `useQupid` hook for ease of use. 
 
 ### Basic Usage of the hook `useQupid`
 
