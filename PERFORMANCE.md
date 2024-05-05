@@ -6,7 +6,7 @@ For that purpose I did quite a bit of research and ended up with few contenders 
 
 To test the contenders I used the provided sample image and each run was done 100 times, with the image always loading again from disk. This adds ~50ms of overhead to each time, but it's a good way to simulate a real world scenario.
 
-The used benchmark can be found from the [example](example/src/components/Benchmark.tsx) project.
+The used benchmark can be found from the [example](example/src/components/Benchmark.tsx) project. For ios the benchmark was run on iPhone 7 and for Android using Pixel 3 emulator.
 
 ## iOS
 
