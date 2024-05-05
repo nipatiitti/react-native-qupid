@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
 import { launchImageLibrary } from 'react-native-image-picker'
 import { useQupid } from 'react-native-qupid'
@@ -47,8 +47,8 @@ export function ImageOverlay() {
         <View style={styles.imageContainer}>
           <Image source={{ uri: imagePath }} style={{ width: imageWidth, height: (imageWidth / 1179) * 2556 }} />
           {scaledCodes.map((qr, i) => (
-            <>
-              <View key={i} style={[styles.overlay, { top: qr.y, left: qr.x, width: qr.width, height: qr.height }]} />
+            <Fragment key={i}>
+              <View style={[styles.overlay, { top: qr.y, left: qr.x, width: qr.width, height: qr.height }]} />
               <Text
                 style={[
                   styles.dataText,
@@ -60,7 +60,7 @@ export function ImageOverlay() {
               >
                 {qr.data}
               </Text>
-            </>
+            </Fragment>
           ))}
         </View>
       ) : null}
